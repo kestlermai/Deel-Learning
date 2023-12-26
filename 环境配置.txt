@@ -1,0 +1,72 @@
+#TensorFlow-gpu环境配置
+1.anaconda安装python环境(跳过)
+2.Cuda和Cudnn的安装，TensorFlow依赖使用GPU即CUDA，而cudnn则是深度神经网络库
+3.安装TensorFlow
+
+#首先安装CUDA-----https://blog.csdn.net/KRISNAT/article/details/130966344
+查看CUDA版本：控制台WIN+R调出控制台然后nvidia-smi查看CUDA版本（https://developer.nvidia.com/cuda-gpus）这里可以看显卡对应的算力
+
+下载CUDA（https://developer.nvidia.com/cuda-toolkit）对应版本
+
+WIN+X打卡终端Windows PowerShell，然后输入nvcc --version，出现对应的CUDA版本信息
+
+#下载CUDNN----教程：https://blog.csdn.net/qq_40968179/article/details/128996692
+
+下载地址：https://developer.nvidia.com/cudnn（鸡哥说他的4090系装的是CUDNN8.2）
+
+注册英伟达账号，然后申请验证一下，通过后即可下载对应CUDA版本的CUDNN（CUDA12.2对应CUDNN8.9.3）
+
+然后解压之后，除了LICENSE文件之外，其他三个文件夹复制到C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.2目录下
+
+
+接着根据教程添加CUDNN环境变量
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.2\bin
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.2\libnvvp
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.2\lib
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.2\include
+
+#检查是否安装成功
+在cmd下，cd C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.2\extras\demo_suite
+然后分别运行 deviceQuery.exe和bandwidthTest.exe，出现PASS则为成功
+
+#查看CUDNN版本
+在C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.2\include目录下
+打开cudnn_version.h文件
+
+
+#安装tensorflow-gpu
+首先根据官网要求（https://tensorflow.google.cn/install/source_windows?hl=zh-cn#tested_build_configurations）
+tensorflow-2.6要求Python3.6-3.9，CUDA跟CUDNN应该是往下兼容的
+
+#创建tensorflow环境
+在anacond prompt输入：conda create -n tensorflow_2.6 python=3.9 -y
+
+#激活环境
+conda activate tensorflow_2.6
+
+#conda安装TensorFlow
+
+conda install tensorflow-gpu==2.6.0 -y
+
+#安装成功后
+python
+import tensorflow as tf
+print(tf.__version__)
+没有报错就代表安装成功
+
+#通过pip源来安装spyder
+#接着就按照最头疼的spyder，正常来说应该是在tensorflow_2.6环境下conda install spyder，不知道为什么一直装不上，后面用pip install spyder来装一下子就装好了，但是有问个问题，现在进入spyder需要激活tensorflow_2.6环境，然后在cmd prompt中输入spyder启动。
+#在Anaconda Navigator页面里，spyder是显示没有安装的，所以比较麻烦
+
+
+#如果存在报错
+譬如：AttributeError: module 'numpy' has no attribute 'object'.
+`np.object` was a deprecated alias for the builtin `object`. To avoid this error in existing code, use `object` by itself. Doing this will not modify any behavior and is safe.
+The aliases was originally deprecated in NumPy 1.20; for more details and guidance see the original release note at:
+    https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations
+
+将您的numpy版本修复到仍然支持使用 np.object 的最后一个版本1.23.4 pip install numpy==1.23.4
+其他包缺失就重新安装
+
+#pytorch同样一样
+安装好了CUDA和CUDNN之后，为pytorch创建一个新环境，官方要求python版本为3.8-3.11，创建好之后激活环境，然后在官网https://pytorch.org/get-started/locally/；根据对应配置复制代码，在新激活的环境中输入自动下载pytorch，同样也通过pip源安装spyder
