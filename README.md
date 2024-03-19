@@ -29,7 +29,7 @@ D:\Anaconda\Library\bin
 
 ---
 
-## 第二步---Cuda和Cudnn的安装（安装CPU版本的，不是独立的NVIDIA显卡都可以可以忽略）
+## 第二步---Cuda和Cudnn的安装（安装CPU版本的，不是独立的NVIDIA显卡都可以忽略）
 
 ### 1.Cuda安装
 
