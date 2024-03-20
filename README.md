@@ -8,9 +8,9 @@
 
 ## 第一步---配置python环境（Anaconda）
 
-### ==1.点击下载并安装==：[Anaconda](https://www.anaconda.com/)（个人习惯一般安装放在D盘）
+### 1.点击下载并安装：[Anaconda](https://www.anaconda.com/)（个人习惯一般安装放在D盘）
 
-### ==2.配置环境:==
+### 2.配置环境:
 
 - 打开系统属性，点击环境变量;（温馨提示：在`cmd+r`打开终端terminal，输入`sysdm.cpl`，在`高级`中打开`环境变量`）
 - 在系统变量中找到`Path`变量，选择后点击编辑;
