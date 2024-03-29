@@ -189,11 +189,17 @@ pip install spyder -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 ## 安装tensorflow后发现一系列的依赖库报错解决
 
-==这个算是tensorflow的老毛病吧，迟迟没有更新，毕竟从1.0推出至今快十年了，当然现在更多是推荐pytorch==
+这个算是tensorflow的老毛病吧，迟迟没有更新，毕竟从1.0推出至今快十年了，当然现在更多是推荐pytorch。pytorch安装方法也一样，安装好了CUDA和CUDNN之后，为pytorch创建一个新环境，官方要求python版本为3.8-3.11，创建好之后激活环境，然后在[pytorch官网](https://pytorch.org/get-started/locally/)；根据对应配置复制代码，在新激活的环境中输入自动下载pytorch，同样也通过pip源安装spyder
 
-==pytorch安装方法也一样，安装好了CUDA和CUDNN之后，为pytorch创建一个新环境，官方要求python版本为3.8-3.11，创建好之后激活环境，然后在[官网](https://pytorch.org/get-started/locally/)；根据对应配置复制代码，在新激活的环境中输入自动下载pytorch，同样也通过pip源安装spyder==
+请注意：根据CUDA版本对应安装，一般来说CUDA都会往下兼容，自身电脑CUDA版本太高也没关系
 
-譬如：
+```powershell
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118 #CUDA 11.8
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121 #CUDA 12.1
+pip3 install torch torchvision torchaudio #CPU
+```
+
+当我们配置好env进入spyder，导库的时候会发现numpy报错，这是因为numpy版本太高，已经不支持 `np.object`所导致
 
 ```cmd
 AttributeError: module 'numpy' has no attribute 'object'.
@@ -202,9 +208,10 @@ The aliases was originally deprecated in NumPy 1.20; for more details and guidan
     https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations
 ```
 
-将您的numpy版本修复到仍然支持使用 np.object 的最后一个版本1.23.4
+解决：将numpy版本修复到仍然支持使用 `np.object` 的最后一个版本1.23.4
 
 ```cmd
+pip uninstall numpy
 pip install numpy==1.23.4
 ```
 
