@@ -14,7 +14,7 @@
 
 - 打开系统属性，点击环境变量;（温馨提示：在`cmd+r`打开终端terminal，输入`sysdm.cpl`，在`高级`中打开`环境变量`）
 - 在系统变量中找到`Path`变量，选择后点击编辑;
-- 新建添加三个变量（根目录、Scripts目录、Library下bin目录）；
+- 新建添加三个变量（**根目录**、**Scripts目录**、**Library下bin目录**）；
 
 🙌示例：
 
@@ -66,9 +66,9 @@ Build cuda_12.3.r12.3/compiler.33492891_0
 
 ### 2.CUDNN安装
 
-- 下载地址：https://developer.nvidia.com/cudnn（鸡哥说他的4090系装的是CUDNN8.2）
+- 下载地址：https://developer.nvidia.com/cudnn
 
-- 注册英伟达账号，然后申请验证一下，通过后即可下载对应CUDA版本的CUDNN（CUDA12.2对应CUDNN8.9.3）
+- 注册英伟达账号，然后申请验证一下，通过后即可下载对应CUDA版本的CUDNN（CUDA12.2对应CUDNN8.9.3，亲测4090装的是CUDNN8.2可兼容）
 
 - 然后解压之后，除了==LICENSE==文件之外，其他三个文件夹复制到==C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.2==目录下
 
@@ -175,8 +175,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 ## 在tensorflow环境下安装spyder
 
-- 正常来说应该是在tensorflow_2.6环境下conda install spyder，不知道为什么一直装不上
-- 在Anaconda Navigator页面里，spyder是显示没有安装的，所以比较麻烦
+- 正常来说应该是在tensorflow_2.6环境下conda install spyder，不知道为什么一直装不上，在Anaconda Navigator页面里，spyder是显示没有安装的，所以比较麻烦
 - 那么我们就通过pip源来安装spyder
 
 ```cmd
@@ -185,13 +184,23 @@ pip install spyder -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 - 通过pip源安装后，有个问题，现在进入spyder需要先激活tensorflow_2.6环境，然后在cmd prompt中输入spyder启动
 
+```
+(base) C:\Users\maihuanzhuo>conda activate tensorflow_2.6
+
+(tensorflow_2.6) C:\Users\maihuanzhuo>spyder
+```
+
+
+
 ---
 
 ## 安装tensorflow后发现一系列的依赖库报错解决
 
 这个算是tensorflow的老毛病吧，迟迟没有更新，毕竟从1.0推出至今快十年了，当然现在更多是推荐pytorch。pytorch安装方法也一样，安装好了CUDA和CUDNN之后，为pytorch创建一个新环境，官方要求python版本为3.8-3.11，创建好之后激活环境，然后在[pytorch官网](https://pytorch.org/get-started/locally/)；根据对应配置复制代码，在新激活的环境中输入自动下载pytorch，同样也通过pip源安装spyder
 
-请注意：根据CUDA版本对应安装，一般来说CUDA都会往下兼容，自身电脑CUDA版本太高也没关系
+请注意：根据python版本和CUDA版本对应安装，一般来说CUDA都会往下兼容，自身电脑CUDA版本太高也没关系
+
+**NOTE:** Latest PyTorch requires Python 3.8 or later. For more details, see Python section below.
 
 ```powershell
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118 #CUDA 11.8
